@@ -1,9 +1,11 @@
 package com.bank;
 
+import java.util.Iterator;
+
 public class CashDispense {
 	
-	boolean dispenseCash(int amount) {
-		if(amount%5==0)
+	boolean dispenseCash(ATMCard obj) {
+		if(obj.amount%5==0)
 			return true;
 		else
 			System.out.println("Please correct the amount of value. It should be multiple of USD 5"
@@ -11,27 +13,43 @@ public class CashDispense {
 		return false;
 	}
 	
-	double chargedAmount(int amount) {
-		if(amount > 100) {
-			double charges=(0.04*amount);
-			return charges;
+	double chargedAmount(ATMCard obj) {
+		if(obj.amount > 100) {
+			obj.charges=(0.04*obj.amount);
+			return obj.charges;
 		}
 		else {
-			double charges=(0.02*amount);
-			return charges;
+			obj.charges=(0.02*obj.amount);
+			return obj.charges;
 		}
 	}
 	
-	double balance(double principle, int amount, double charges) {
-		double balance=principle-amount-charges;
-		return balance;	
+	double balance(ATMCard obj) {
+		Iterator<Account> itr = AccountDetails.list.iterator(); 
+		  while(itr.hasNext()){  
+			    Account acc=(Account)itr.next();
+				if(obj.cardNumber==acc.getCardNumber()) {
+					obj.balance=acc.getBalance()-obj.amount-obj.charges;
+					return obj.balance;
+				}
+		  }
+		  return obj.balance;
 	}
 	
-	boolean isValidTransaction(double balance, double minimumBalance) {
-		if(balance>=minimumBalance)
-			return true;
-		else
-			return false;	
+	double isValidTransaction(ATMCard obj) {
+		Iterator<Account> itr = AccountDetails.list.iterator(); 
+		  while(itr.hasNext()){  
+			    Account acc=(Account)itr.next();
+				if(obj.cardNumber==acc.getCardNumber()) {
+					if(obj.balance >= acc.getMINIMUM_BALANCE()) {
+						acc.setBalance(obj.balance);
+						return 1;
+					}
+					else
+						return 0;
+				}	
+		  }
+		return 0;
 	}
 }
 

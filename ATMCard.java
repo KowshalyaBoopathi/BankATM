@@ -4,13 +4,14 @@ import java.util.*;
 
 public class ATMCard {
 	
-	int number, cardNumber, deposit;
-	double balance;
+	int number, cardNumber, amount;
+	double balance, charges;
 	
 	public static void main(String[] args) {
 
 		
-		ATMCard atm;
+		ATMCard atmaccount;
+		Operation acc;
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -30,24 +31,99 @@ public class ATMCard {
 		case 1:
 			
 			System.out.println("Enter the account number");
-			atm = new ATMCard();
-			atm.number = sc.nextInt();
+			atmaccount = new ATMCard();
+			atmaccount.number = sc.nextInt();
+			
 			//validate account number
-			Operation acc = new Operation();		
-			acc.isValidAccount(atm);
-
-			System.out.println("Enter the amount to be deposited");
-			//deposit = sc.nextInt();
+			
+			acc = new Operation();
+			
+			if(acc.isValidAccount(atmaccount)) {
+				System.out.println("Enter the amount to be deposited");
+				atmaccount.amount = sc.nextInt();
+				atmaccount.balance = acc.deposit(atmaccount);
+			}
+			else
+				System.out.println("Enter valid account number");
 			
 			break;
 		case 2:
 			
+			System.out.println("Enter the account number");
+			atmaccount = new ATMCard();
+			atmaccount.number = sc.nextInt();
+			
+			acc = new Operation();
+
+			if(acc.isValidAccount(atmaccount)) {
+				atmaccount.balance=acc.balanceCheck(atmaccount);
+				System.out.println("Balance USD "+atmaccount.balance);
+			}
+			else
+				System.out.println("Enter valid account number");
 			break;
 		case 3:
+			
+			atmaccount = new ATMCard();
+
+			System.out.println("Enter the ATM Card Number");
+			atmaccount.cardNumber = sc.nextInt();
+			
+			CashDispense cash = new CashDispense();
+			//validate card number
+			
+			acc = new Operation();
+			
+			if(acc.isValidCard(atmaccount)) {
+				System.out.println("Enter amount to withdraw");
+				atmaccount.amount = sc.nextInt();
+				
+				if(cash.dispenseCash(atmaccount)) {
+					atmaccount.charges=cash.chargedAmount(atmaccount);
+					atmaccount.balance=cash.balance(atmaccount);
+					
+					if(cash.isValidTransaction(atmaccount)==1) {
+						System.out.println("Charges USD "+atmaccount.charges);
+						System.out.println("Balance USD "+atmaccount.balance);
+					}
+					else
+						System.out.println("Insufficient minimum balance");
+				}
+			}
+			else
+				System.out.println("Enter valid card number");
+			
+			//Account a5 = new Account(34, 894, 1000);
 
 			break;
 		case 4:
 			
+			atmaccount = new ATMCard();
+
+			System.out.println("Enter the ATM Card Number");
+			atmaccount.cardNumber = sc.nextInt();
+			
+			SwipeShopping shop = new SwipeShopping();
+			//validate card number
+			
+			acc = new Operation();
+			
+			if(acc.isValidCard(atmaccount)) {
+				System.out.println("Enter amount to swipe");
+				atmaccount.amount = sc.nextInt();
+				
+					atmaccount.charges=shop.cashBack(atmaccount);
+					atmaccount.balance=shop.balance(atmaccount);
+					
+					if(shop.isValidTransaction(atmaccount)==1) {
+						System.out.println("Charges USD "+atmaccount.charges);
+						System.out.println("Balance USD "+atmaccount.balance);
+					}
+					else
+						System.out.println("Insufficient minimum balance");
+			}
+			else
+				System.out.println("Enter valid card number");
 			break;
 		case 5:
 			System.exit(0);
