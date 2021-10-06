@@ -13,7 +13,7 @@ public class Operation {
 					acc.setBalance(obj.balance);
 				}
 		  }
-			System.out.println("Balance USD "+obj.balance);
+		System.out.println("Balance USD "+obj.balance);
 		  return obj.balance;
 	}
 	
@@ -21,10 +21,9 @@ public class Operation {
 		Iterator<Account> itr = AccountDetails.list.iterator(); 
 		  while(itr.hasNext()){  
 			    Account acc=(Account)itr.next();
-				if(obj.number==acc.getNumber())
-					  return acc.getBalance();
+				  return acc.getBalance();
 		  }
-			System.out.println("Balance USD "+obj.balance);
+		System.out.println("Balance USD "+obj.balance);
 		  return obj.balance;
 	}
 	
@@ -32,8 +31,8 @@ public class Operation {
 		Iterator<Account> itr = AccountDetails.list.iterator();  
 		  while(itr.hasNext()){  
 		    Account acc=(Account)itr.next();
-		if(obj.number==acc.getNumber())
-			return true;
+		    if(obj.number==acc.getNumber())
+		    	return true;
 	}
 		return false;
 	}
@@ -42,8 +41,8 @@ public class Operation {
 		Iterator<Account> itr = AccountDetails.list.iterator();  
 		  while(itr.hasNext()){  
 		    Account acc=(Account)itr.next();
-		if(obj.cardNumber==acc.getCardNumber())
-			return true;
+		    if(obj.cardNumber==acc.getCardNumber())
+		    	return true;
 	}
 		return false;
 	}

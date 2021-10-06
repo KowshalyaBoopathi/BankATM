@@ -23,7 +23,6 @@ public class SwipeShopping {
 		Iterator<Account> itr = AccountDetails.list.iterator(); 
 		  while(itr.hasNext()){  
 			    Account acc=(Account)itr.next();
-				if(obj.cardNumber==acc.getCardNumber()) {
 					if(obj.balance >= acc.getMINIMUM_BALANCE()) {
 						acc.setBalance(obj.balance);
 						return 1;
@@ -31,7 +30,6 @@ public class SwipeShopping {
 					else
 						return 0;
 				}	
-		  }
 		return 0;
 	}
 	
