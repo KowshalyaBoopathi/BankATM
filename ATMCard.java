@@ -47,6 +47,7 @@ public class ATMCard {
 				System.out.println("Enter valid account number");
 			
 			break;
+			
 		case 2:
 			
 			System.out.println("Enter the account number");
@@ -62,6 +63,7 @@ public class ATMCard {
 			else
 				System.out.println("Enter valid account number");
 			break;
+			
 		case 3:
 			
 			atmaccount = new ATMCard();
@@ -96,6 +98,7 @@ public class ATMCard {
 			//Account a5 = new Account(34, 894, 1000);
 
 			break;
+			
 		case 4:
 			
 			atmaccount = new ATMCard();
@@ -125,9 +128,11 @@ public class ATMCard {
 			else
 				System.out.println("Enter valid card number");
 			break;
+			
 		case 5:
 			System.exit(0);
 			break;
+			
 		default:
 			System.out.println("Please select a valid option");	
 		}
